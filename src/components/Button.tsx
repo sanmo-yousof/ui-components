@@ -45,7 +45,6 @@ export default function Button({
   size = "md",
   loading = false,
   disabled = false,
-  loadingText="",
   className = "",
   children,
   ...props
@@ -66,7 +65,7 @@ export default function Button({
         <LuLoaderCircle className="animate-spin"/>
       )}
 
-      {loading ? loadingText : children}
+      {children}
     </button>
   );
 }
