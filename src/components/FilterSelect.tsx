@@ -1,65 +1,47 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { FiChevronDown, FiCheck } from "react-icons/fi";
 import Label from "./Label";
-
-interface SelectOption {
+interface FilterOption {
   label: string;
   value: string;
   disabled?: boolean;
 }
-
-interface SelectProps extends Omit<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  "value" | "defaultValue" | "onChange"
-> {
-  outline?: boolean;
-  border?: boolean;
+interface FilterSelectProps {
   label?: string;
-  required?: boolean;
-  options?: SelectOption[];
-  placeholder?: string;
+  options?: FilterOption[];
   value?: string;
   onChange?: (value: string) => void;
+  placeholder?: string;
+  border?: boolean;
+  outline?: boolean;
+  disabled?: boolean;
+  className?: string;
 }
-
-const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
   (
     {
-      className,
-      outline = true,
-      border = true,
       label = "",
-      required = false,
-      disabled = false,
       options = [],
-      placeholder = "Select an option",
       value,
       onChange,
-      ...props
+      placeholder = "All",
+      border = true,
+      outline = true,
+      disabled = false,
+      className,
     },
     ref,
   ) => {
-    const [selectedValue, setSelectedValue] = useState<string>(value ?? "");
-
+    const [selectedValue, setSelectedValue] = useState<string>(value ?? "all");
     const [open, setOpen] = useState(false);
-
     const wrapperRef = useRef<HTMLDivElement>(null);
-
-    const selectedOption = options.find(
-      (option) => option.value === selectedValue,
-    );
-
-    // Sync controlled value
     useEffect(() => {
       if (value !== undefined) {
         setSelectedValue(value);
       }
     }, [value]);
-
-    // Close when clicking outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -69,67 +51,31 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           setOpen(false);
         }
       };
-
       document.addEventListener("mousedown", handleClickOutside);
-
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, []);
-
-    const handleSelect = (option: SelectOption) => {
+    const selectedOption = options.find(
+      (option) => option.value === selectedValue,
+    );
+    const handleSelect = (option: FilterOption) => {
       if (option.disabled) return;
-
       setSelectedValue(option.value);
       setOpen(false);
-
       onChange?.(option.value);
     };
-
     return (
-      <div className="max-w-md">
-        {label && <Label required={required}>{label}</Label>}
-
+      <div ref={ref} className="max-w-md">
+        {label && <Label > {label} </Label>}
         <div ref={wrapperRef} className="relative w-full">
-          {/* Hidden native select */}
-          <select
-            ref={ref}
-            value={selectedValue}
-            onChange={(e) => {
-              const newValue = e.target.value;
-
-              setSelectedValue(newValue);
-              onChange?.(newValue);
-            }}
-            required={required}
-            disabled={disabled}
-            className="sr-only"
-            tabIndex={-1}
-            aria-hidden="true"
-            {...props}
-          >
-            <option value="" disabled>
-              {placeholder}
-            </option>
-
-            {options.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                disabled={option.disabled}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-
-          {/* Select Button */}
+          {/* Filter Button */}
           <button
             type="button"
             disabled={disabled}
             onClick={() => setOpen((prev) => !prev)}
             className={cn(
-              "flex h-11 w-full min-w-[200px] items-center justify-between",
+              "flex h-11 w-full min-w-[180px] items-center justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
               border && "border border-gray-400 focus:border-primary",
@@ -140,13 +86,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               className,
             )}
           >
-            {/* Selected item / Placeholder */}
             <span
-              className={cn(selectedOption ? "text-gray-900" : "text-gray-400")}
+              className={cn(selectedOption ? "text-gray-900" : "text-gray-500")}
             >
-              {selectedOption?.label || placeholder}
-            </span>
-
+              {selectedOption?.label ?? placeholder}{" "}
+            </span>{" "}
             <FiChevronDown
               size={18}
               className={cn(
@@ -155,7 +99,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               )}
             />
           </button>
-
           {/* Dropdown */}
           {open && !disabled && (
             <div
@@ -169,7 +112,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               <div className="max-h-60 overflow-y-auto p-1">
                 {options.map((option) => {
                   const isSelected = selectedValue === option.value;
-
                   return (
                     <button
                       key={option.value}
@@ -181,17 +123,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                         "justify-between rounded-md px-3",
                         "text-left text-sm",
                         "transition-colors",
-
                         option.disabled
                           ? "cursor-not-allowed text-gray-300"
                           : "cursor-pointer text-gray-700 hover:bg-gray-50",
-
                         isSelected && "bg-primary/5 text-primary",
                       )}
                     >
                       <span>{option.label}</span>
-
-                      {/* Check mark */}
                       {isSelected && (
                         <FiCheck size={18} className="shrink-0 text-primary" />
                       )}
@@ -206,7 +144,5 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
   },
 );
-
-Select.displayName = "Select";
-
-export default Select;
+FilterSelect.displayName = "FilterSelect";
+export default FilterSelect;

@@ -1,8 +1,12 @@
 import Button from "@/components/Button";
+import FilterSelect from "@/components/FilterSelect";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
 import RangeInput from "@/components/RangeInput";
+import Search from "@/components/Search";
 import Select from "@/components/Select";
+import Textarea from "@/components/Textarea";
+import ThemeToggle from "@/components/ThemeToggle";
 import Image from "next/image";
 
 export default function Home() {
@@ -16,6 +20,7 @@ export default function Home() {
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="danger">Danger</Button>
+          <ThemeToggle/>
         </div>
       </div>
       <div>
@@ -62,14 +67,28 @@ export default function Home() {
               },
             ]}
           />
+         
         </div>
+         <Textarea label="Description" required/>
       </div>
 
       <div>
         <h2 className="text-xl font-bold border-b border-gray-300">Search</h2>
         <div className="flex py-4 flex-wrap gap-4">
           <RangeInput />
+          <FilterSelect
+            options={[
+              { label: "All", value: "all" },
+              { label: "Pending", value: "pending" },
+              { label: "In Progress", value: "inProgress" },
+              { label: "Complete", value: "complete" },
+            ]}
+            label="Status"
+          />
+          <Search label="Search"/>
+          <Search showButton label="Search"/>
         </div>
+
       </div>
     </div>
   );
