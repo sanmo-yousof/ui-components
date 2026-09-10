@@ -11,7 +11,6 @@ type ButtonVariant =
 type ButtonSize = "sm" | "md" | "lg";
 
 
-
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -36,7 +35,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: "py-2 px-3 text-sm",
-  md: "md:py-2.5 py-2 md:px-5 px-4 text-sm",
+  md: "py-2.5 px-4 text-sm",
   lg: "py-3 px-6 text-base",
 };
 

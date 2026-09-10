@@ -57,7 +57,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "transition-all duration-200",
               isNumber &&
                 "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
-              border && "border border-gray-400",
+              border && "border border-gray-400 focus:border-primary",
               !border && "border-none",
               outline &&
                 "focus:outline-none focus:ring-2 focus:ring-primary/30",

@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
+import RangeInput from "@/components/RangeInput";
 import Select from "@/components/Select";
 import Image from "next/image";
 
@@ -8,8 +9,8 @@ export default function Home() {
   return (
     <div className="space-y-8 flex flex-col">
       <div>
-        <h2 className="text-xl font-bold">Button</h2>
-        <div className="flex flex-wrap gap-4">
+        <h2 className="text-xl font-bold border-b border-gray-300">Button</h2>
+        <div className="flex flex-wrap gap-4 py-4">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
@@ -18,8 +19,8 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h2 className="text-xl font-bold">Input</h2>
-        <div className="flex gap-4">
+        <h2 className="text-xl font-bold border-b border-gray-300">Input</h2>
+        <div className="flex gap-4 py-4 flex-wrap">
           <Input label="Name" />
           <Input
             required
@@ -61,6 +62,13 @@ export default function Home() {
               },
             ]}
           />
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-bold border-b border-gray-300">Search</h2>
+        <div className="flex py-4 flex-wrap gap-4">
+          <RangeInput />
         </div>
       </div>
     </div>
