@@ -78,23 +78,23 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
               "flex h-11 w-full min-w-[180px] items-center justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
-              border && "border border-gray-400 focus:border-primary",
+              border && "border border-border-input focus:border-primary",
               !border && "border-none",
               outline && open && "outline-none ring-2 ring-primary/30",
               !outline && "outline-none ring-0",
-              disabled && "cursor-not-allowed bg-gray-100 opacity-60",
+              disabled && "cursor-not-allowed bg-background-secondary opacity-60",
               className,
             )}
           >
             <span
-              className={cn(selectedOption ? "text-gray-900" : "text-gray-500")}
+              className={cn(selectedOption ? "" : "text-foreground-secondary")}
             >
               {selectedOption?.label ?? placeholder}{" "}
             </span>{" "}
             <FiChevronDown
               size={18}
               className={cn(
-                "shrink-0 text-gray-500 transition-transform duration-200",
+                "shrink-0 text-foreground-secondary transition-transform duration-200",
                 open && "rotate-180",
               )}
             />
@@ -105,8 +105,8 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
               className={cn(
                 "absolute left-0 top-full z-50 mt-1 w-full",
                 "overflow-hidden rounded-md",
-                "border border-gray-200 bg-white",
-                "shadow-lg",
+                "border border-border-input/20 ",
+                "shadow bg-background",
               )}
             >
               <div className="max-h-60 overflow-y-auto p-1">
@@ -124,9 +124,9 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
                         "text-left text-sm",
                         "transition-colors",
                         option.disabled
-                          ? "cursor-not-allowed text-gray-300"
-                          : "cursor-pointer text-gray-700 hover:bg-gray-50",
-                        isSelected && "bg-primary/5 text-primary",
+                          ? "cursor-not-allowed"
+                          : "cursor-pointer hover:bg-background-secondary",
+                        isSelected && "bg-primary/10 hover:bg-primary/10 text-primary",
                       )}
                     >
                       <span>{option.label}</span>

@@ -30,14 +30,14 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           required={required}
           className={cn(
             "min-h-28 w-full resize-y rounded-md px-3 py-2.5",
-            "text-sm text-gray-900",
-            "placeholder:text-gray-400",
+            "text-sm",
+            "placeholder:text-foreground-secondary",
             "transition-all duration-200",
-            border && "border border-gray-400 focus:border-primary",
+            border && "border border-border-input focus:border-primary",
             !border && "border-none",
             outline && "focus:outline-none focus:ring-2 focus:ring-primary/30",
             !outline && "focus:outline-none focus:ring-0",
-            disabled && "cursor-not-allowed bg-gray-100 opacity-60",
+            disabled && "cursor-not-allowed bg-background-secondary opacity-60",
             className,
           )}
           {...props}

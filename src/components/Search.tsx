@@ -77,19 +77,19 @@ const Search = React.forwardRef<HTMLInputElement, SearchInputProps>(
             className={cn(
               "relative flex h-11 w-full items-center",
               "rounded-md",
-              border && "border border-gray-400 focus-within:border-primary",
+              border && "border border-border-input focus-within:border-primary",
               !border && "border-none",
               outline &&
                 "focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/30",
               !outline && "focus-within:outline-none focus-within:ring-0",
-              disabled && "cursor-not-allowed bg-gray-100 opacity-60",
+              disabled && "cursor-not-allowed bg-background-secondary opacity-60",
             )}
           >
             
             {/* Search Icon */}
             <IoSearchOutline
               size={20}
-              className="ml-3 shrink-0 text-gray-400"
+              className="ml-3 shrink-0 text-foreground-secondary"
             />
             <input
               ref={ref}
@@ -100,8 +100,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchInputProps>(
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               className={cn(
-                "h-full w-full bg-transparent px-3 text-sm text-gray-900",
-                "placeholder:text-gray-400",
+                "h-full w-full bg-transparent px-3 text-sm ",
+                "placeholder:text-foreground-secondary",
                 "outline-none",
                 "disabled:cursor-not-allowed",
                 className,

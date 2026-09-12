@@ -1,19 +1,19 @@
 import Button from "@/components/Button";
 import FilterSelect from "@/components/FilterSelect";
 import Input from "@/components/Input";
-import Label from "@/components/Label";
+import OTPInput from "@/components/OtpInput";
 import RangeInput from "@/components/RangeInput";
 import Search from "@/components/Search";
 import Select from "@/components/Select";
 import Textarea from "@/components/Textarea";
 import ThemeToggle from "@/components/ThemeToggle";
-import Image from "next/image";
+
 
 export default function Home() {
   return (
     <div className="space-y-8 flex flex-col">
       <div>
-        <h2 className="text-xl font-bold border-b border-gray-300">Button</h2>
+        <h2 className="text-xl font-bold border-b border-border">Button</h2>
         <div className="flex flex-wrap gap-4 py-4">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -24,14 +24,15 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h2 className="text-xl font-bold border-b border-gray-300">Input</h2>
+        <h2 className="text-xl font-bold border-b border-border">Input</h2>
         <div className="flex gap-4 py-4 flex-wrap">
-          <Input label="Name" />
+          <Input  label="Name" />
           <Input
             required
             type="email"
             placeholder="Enter Your Email"
             label="Email"
+            
           />
 
           <Input
@@ -39,6 +40,7 @@ export default function Home() {
             type="number"
             placeholder="Enter Your Age"
             label="Age"
+            
           />
 
           <Input
@@ -46,6 +48,7 @@ export default function Home() {
             type="password"
             placeholder="Passowrd"
             label="Password"
+            
           />
 
           <Select
@@ -66,17 +69,21 @@ export default function Home() {
                 value: "pakistan",
               },
             ]}
+            
           />
+
+          <OTPInput />
          
         </div>
-         <Textarea label="Description" required/>
+         <Textarea  label="Description" required/>
       </div>
 
       <div>
-        <h2 className="text-xl font-bold border-b border-gray-300">Search</h2>
+        <h2 className="text-xl font-bold border-b border-border">Search</h2>
         <div className="flex py-4 flex-wrap gap-4">
-          <RangeInput />
+          <RangeInput/>
           <FilterSelect
+          
             options={[
               { label: "All", value: "all" },
               { label: "Pending", value: "pending" },
@@ -85,11 +92,11 @@ export default function Home() {
             ]}
             label="Status"
           />
-          <Search label="Search"/>
-          <Search showButton label="Search"/>
+          <Search  label="Search"/>
+          <Search  showButton label="Search"/>
         </div>
 
-      </div>
+      </div>  
     </div>
   );
 }

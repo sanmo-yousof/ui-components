@@ -113,7 +113,7 @@ export default function RangeInput({
       <div className="mb-2 flex items-center justify-between">
         <Label className="mb-0">{label}</Label>
 
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-sm font-medium">
           {startValue} - {endValue}
         </span>
       </div>
@@ -200,7 +200,7 @@ export default function RangeInput({
       </div>
 
       {/* Min / Max */}
-      <div className="mt-1 flex justify-between text-xs text-gray-400">
+      <div className="mt-1 flex justify-between text-xs text-foreground-secondary">
         <span>{min}</span>
         <span>{max}</span>
       </div>

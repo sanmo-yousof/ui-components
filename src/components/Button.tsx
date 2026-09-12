@@ -28,7 +28,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   outline:
     "border border-primary bg-transparent text-primary hover:text-white hover:bg-primary",
   ghost:
-    "bg-transparent text-primary hover:bg-primary/5",
+    "bg-transparent text-primary hover:bg-primary/10",
   danger:
     "bg-red-500 text-white hover:bg-red-600",
 };
