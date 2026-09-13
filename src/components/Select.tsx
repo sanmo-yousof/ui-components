@@ -129,7 +129,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             disabled={disabled}
             onClick={() => setOpen((prev) => !prev)}
             className={cn(
-              "flex h-11 w-full min-w-[200px] items-center justify-between",
+              "flex h-11 w-full min-w-[200px] bg-background-secondary items-center cursor-pointer justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
               border && "border border-border-input focus:border-primary",
@@ -162,7 +162,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               className={cn(
                 "absolute left-0 top-full z-50 mt-1 w-full",
                 "overflow-hidden rounded-md",
-                "border bg-background border-border-input/20",
+                "border bg-dropdown border-border-input/20",
                 "shadow",
               )}
             >
@@ -184,7 +184,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
                         option.disabled
                           ? "cursor-not-allowed"
-                          : "cursor-pointer hover:bg-background-secondary",
+                          : "cursor-pointer hover:bg-background-custom",
 
                         isSelected && "bg-primary/10 hover:bg-primary/10 text-primary",
                       )}

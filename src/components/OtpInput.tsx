@@ -157,7 +157,7 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={(e) => handlePaste(e, index)}
               className={cn(
-                "h-11 w-11 rounded-md px-2 text-center text-base",
+                "h-11 w-11 rounded-md px-2 bg-background-secondary text-center text-base",
                 "font-medium",
                 "placeholder:text-foreground-secondary",
                 "transition-all duration-200",

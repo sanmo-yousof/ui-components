@@ -75,7 +75,7 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
             disabled={disabled}
             onClick={() => setOpen((prev) => !prev)}
             className={cn(
-              "flex h-11 w-full min-w-[180px] items-center justify-between",
+              "flex h-11 w-full bg-background-secondary min-w-[180px] cursor-pointer items-center justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
               border && "border border-border-input focus:border-primary",
@@ -106,7 +106,7 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
                 "absolute left-0 top-full z-50 mt-1 w-full",
                 "overflow-hidden rounded-md",
                 "border border-border-input/20 ",
-                "shadow bg-background",
+                "shadow bg-dropdown",
               )}
             >
               <div className="max-h-60 overflow-y-auto p-1">
@@ -125,7 +125,7 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
                         "transition-colors",
                         option.disabled
                           ? "cursor-not-allowed"
-                          : "cursor-pointer hover:bg-background-secondary",
+                          : "cursor-pointer hover:bg-background-custom",
                         isSelected && "bg-primary/10 hover:bg-primary/10 text-primary",
                       )}
                     >

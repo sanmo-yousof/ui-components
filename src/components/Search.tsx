@@ -77,7 +77,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchInputProps>(
             className={cn(
               "relative flex h-11 w-full items-center",
               "rounded-md",
-              border && "border border-border-input focus-within:border-primary",
+              border && "border border-border-input bg-background-secondary focus-within:border-primary",
               !border && "border-none",
               outline &&
                 "focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/30",

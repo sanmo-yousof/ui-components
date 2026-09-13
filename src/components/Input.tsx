@@ -42,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <div className="max-w-md">
+      <div className="max-w-sm w-full">
         <Label required={required}>{label}</Label>
         <div className="relative w-full">
           <input
@@ -52,7 +52,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             required={required}
             onKeyDown={handleKeyDown}
             className={cn(
-              "h-11 w-full rounded-md  px-3 text-sm",
+              "h-11 w-full rounded-md bg-background-secondary  px-3 text-sm",
               "placeholder:text-foreground-secondary",
               "transition-all duration-200",
               isNumber &&

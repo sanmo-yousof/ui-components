@@ -17,19 +17,21 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       label = "",
       disabled = false,
       required = false,
+      placeholder = "Description",
       ...props
     },
     ref,
   ) => {
     return (
-      <div className="max-w-sm">
+      <div className="max-w-md w-full">
         {label && <Label required={required}>{label}</Label>}
         <textarea
           ref={ref}
           disabled={disabled}
           required={required}
+          placeholder={placeholder}
           className={cn(
-            "min-h-28 w-full resize-y rounded-md px-3 py-2.5",
+            "min-h-28 w-full bg-background-secondary resize-y rounded-md px-3 py-2.5",
             "text-sm",
             "placeholder:text-foreground-secondary",
             "transition-all duration-200",
