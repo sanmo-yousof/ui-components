@@ -30,7 +30,7 @@ export default function Home() {
           <ThemeToggle />
           <Pagination
             currentPage={currentPage}
-            totalPages={10}
+            totalPages={6}
             onPageChange={setCurrentPage}
           />
         </div>

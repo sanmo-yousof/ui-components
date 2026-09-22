@@ -42,10 +42,7 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
     useImperativeHandle(ref, () => inputRefs.current as HTMLInputElement[]);
 
     useEffect(() => {
-      const newOtp = Array.from(
-        { length },
-        (_, index) => value[index] || "",
-      );
+      const newOtp = Array.from({ length }, (_, index) => value[index] || "");
 
       setOtp(newOtp);
     }, [value, length]);
@@ -79,27 +76,25 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
         if (otp[index]) {
           const newOtp = [...otp];
           newOtp[index] = "";
-
           updateOtp(newOtp);
         } else if (index > 0) {
           inputRefs.current[index - 1]?.focus();
         }
-
         return;
       }
-
       if (e.key === "ArrowLeft" && index > 0) {
         inputRefs.current[index - 1]?.focus();
+        return;
       }
-
       if (e.key === "ArrowRight" && index < length - 1) {
         inputRefs.current[index + 1]?.focus();
+        return;
       }
-
-      if (
-        !/^\d$/.test(e.key) &&
-        !["Tab", "Delete", "ArrowLeft", "ArrowRight"].includes(e.key)
-      ) {
+      // Allow Ctrl + V / Cmd + V
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "v") {
+        return;
+      }
+      if (!/^\d$/.test(e.key) && !["Tab", "Delete"].includes(e.key)) {
         e.preventDefault();
       }
     };
@@ -109,29 +104,22 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
       index: number,
     ) => {
       e.preventDefault();
+      e.stopPropagation();
 
-      const pastedData = e.clipboardData
-        .getData("text")
-        .replace(/\D/g, "")
-        .slice(0, length);
+      const clipboardText = e.clipboardData.getData("text/plain");
 
-      if (!pastedData) return;
+      const digits = clipboardText.replace(/\D/g, "").slice(0, length);
 
-      const newOtp = [...otp];
+      if (!digits) return;
 
-      pastedData.split("").forEach((digit, pasteIndex) => {
-        const targetIndex = index + pasteIndex;
+      const newOtp = Array.from({ length }, (_, i) => digits[i] || "");
 
-        if (targetIndex < length) {
-          newOtp[targetIndex] = digit;
-        }
+      setOtp(newOtp);
+      onChange?.(newOtp.join(""));
+
+      requestAnimationFrame(() => {
+        inputRefs.current[Math.min(digits.length, length - 1)]?.focus();
       });
-
-      updateOtp(newOtp);
-
-      const nextIndex = Math.min(index + pastedData.length, length - 1);
-
-      inputRefs.current[nextIndex]?.focus();
     };
 
     return (
@@ -157,15 +145,16 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={(e) => handlePaste(e, index)}
               className={cn(
-                "h-11 w-11 rounded-md px-2 bg-background-secondary text-center text-base",
+                "h-11 w-11 rounded-md text-input-text px-2 bg-input-background text-center text-base",
                 "font-medium",
-                "placeholder:text-foreground-secondary",
+                "placeholder:text-input-placeholder",
                 "transition-all duration-200",
-                "border border-border-input",
-                "focus:border-primary",
+                "border border-input-border",
+                "focus:border-input-active-border",
                 "focus:outline-none",
-                "focus:ring-2 focus:ring-primary/30",
-                disabled && "cursor-not-allowed bg-background-secondary opacity-60",
+                "focus:ring-2 focus:ring-input-active-ring",
+                disabled &&
+                  "cursor-not-allowed bg-input-disabled-background opacity-60",
               )}
             />
           ))}
@@ -175,7 +164,4 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
   },
 );
 
-
-
 export default OTPInput;
-

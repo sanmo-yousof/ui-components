@@ -75,26 +75,26 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
             disabled={disabled}
             onClick={() => setOpen((prev) => !prev)}
             className={cn(
-              "flex h-11 w-full bg-background-secondary min-w-[180px] cursor-pointer items-center justify-between",
+              "flex h-11 w-full bg-input-background text-input min-w-[180px] cursor-pointer items-center justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
-              border && "border border-border-input focus:border-primary",
+              border && "border border-input-border focus:border-input-active-border",
               !border && "border-none",
-              outline && open && "outline-none ring-2 ring-primary/30",
+              outline && open && "outline-none ring-2 ring-input-active-ring",
               !outline && "outline-none ring-0",
-              disabled && "cursor-not-allowed bg-background-secondary opacity-60",
+              disabled && "cursor-not-allowed bg-input-disabled-background opacity-60",
               className,
             )}
           >
             <span
-              className={cn(selectedOption ? "" : "text-foreground-secondary")}
+              className={cn(selectedOption ? "" : "text-input-placeholder")}
             >
               {selectedOption?.label ?? placeholder}{" "}
             </span>{" "}
             <FiChevronDown
               size={18}
               className={cn(
-                "shrink-0 text-foreground-secondary transition-transform duration-200",
+                "shrink-0 text-input-icon transition-transform duration-200",
                 open && "rotate-180",
               )}
             />
@@ -105,8 +105,8 @@ const FilterSelect = React.forwardRef<HTMLDivElement, FilterSelectProps>(
               className={cn(
                 "absolute left-0 top-full z-50 mt-1 w-full",
                 "overflow-hidden rounded-md",
-                "border border-border-input/20 ",
-                "shadow bg-dropdown",
+                "border border-input-border/50 ",
+                "shadow-custom bg-dropdown-background",
               )}
             >
               <div className="max-h-60 overflow-y-auto p-1">

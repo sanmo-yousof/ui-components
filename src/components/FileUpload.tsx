@@ -127,8 +127,8 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
           <div
             className={cn(
               "flex flex-wrap items-center gap-3",
-              "w-full rounded-md border border-border-input",
-              "bg-background-secondary p-3",
+              "w-full rounded-md border border-input-border",
+              "bg-input-background p-3",
               disabled && "cursor-not-allowed opacity-60",
               className,
             )}
@@ -139,7 +139,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
               return (
                 <div
                   key={`${file.name}-${index}`}
-                  className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-border-input"
+                  className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-input-border"
                 >
                   {preview ? (
                     <img
@@ -148,7 +148,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full flex-col items-center justify-center bg-background-secondary p-2">
+                    <div className="flex h-full w-full flex-col items-center justify-center bg-input-background p-2">
                       <FiFile className="text-xl" />
 
                       <span className="mt-1 w-full truncate text-center text-[10px]">
@@ -183,11 +183,11 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                 "flex h-24 w-24 shrink-0 flex-col",
                 "items-center justify-center",
                 "rounded-md border border-dashed",
-                "border-border-input",
+                "border-input-border",
                 "text-foreground-secondary",
                 "cursor-pointer",
                 "transition-all duration-200",
-                "hover:border-primary hover:bg-primary/5",
+                "hover:border-input-active-border hover:bg-primary/5",
                 disabled &&
                   "cursor-not-allowed opacity-60",
               )}
@@ -237,7 +237,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
             "relative flex w-full bg-background-secondary",
             "cursor-pointer flex-col items-center justify-center",
             "rounded-md border border-dashed",
-            "border-border-input",
+            "border-input-border",
             "p-4",
             "transition-all duration-200",
             "hover:border-primary hover:bg-primary/5",
@@ -263,7 +263,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
               onClick={(event) => event.stopPropagation()}
             >
               {preview ? (
-                <div className="relative h-20 w-30 overflow-hidden rounded-md border border-border-input">
+                <div className="relative h-20 w-30 overflow-hidden rounded-md border border-input-border">
                   <img
                     src={preview}
                     alt={file.name}
@@ -285,7 +285,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center gap-3 rounded-md border border-border-input bg-background-secondary p-3">
+                <div className="flex items-center gap-3 rounded-md border border-input-border bg-background-secondary p-3">
                   <FiFile className="shrink-0 text-xl" />
 
                   <span className="max-w-52 truncate text-sm">{file.name}</span>

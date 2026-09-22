@@ -130,7 +130,7 @@ const DatePicker = ({
             "flex h-11 w-full cursor-pointer bg-background-secondary min-w-[200px] items-center justify-between",
             "rounded-md px-3 text-left text-sm",
             "transition-all duration-200",
-            "border border-border-input focus:border-primary",
+            "border border-input-border focus:border-primary",
             open && "outline-none ring-2 ring-primary/30",
             disabled && "cursor-not-allowed bg-background-secondary opacity-60",
             className,
@@ -154,8 +154,8 @@ const DatePicker = ({
           <div
             className={cn(
               "absolute left-0 top-full z-50 mt-2 w-full min-w-[300px]",
-              "rounded-lg border border-border-input/20",
-              "bg-dropdown p-4 shadow",
+              "rounded-lg border border-input-border/20",
+              "bg-dropdown-background p-4 shadow-custom",
             )}
           >
             {/* Month Header */}

@@ -63,7 +63,7 @@ const ProfileImageUpload = ({
           onClick={handleClick}
           className={cn(
             "group relative h-24 w-24 shrink-0 overflow-hidden rounded-full",
-            "cursor-pointer border border-border-input",
+            "cursor-pointer border border-input-border",
             "bg-background-secondary",
             "transition-all duration-200 hover:border-primary",
             disabled && "cursor-not-allowed opacity-60",

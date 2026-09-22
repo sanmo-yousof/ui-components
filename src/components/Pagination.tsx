@@ -20,32 +20,22 @@ const Pagination = ({
   className,
 }: PaginationProps) => {
   const getPages = (): (number | "...")[] => {
-    // Show every page when there are only a few pages
-    if (totalPages <= 7) {
+    // Show all pages when there are 5 or fewer
+    if (totalPages <= 5) {
       return Array.from(
         { length: totalPages },
         (_, index) => index + 1
       );
     }
 
-    // --------------------------------
     // Near the beginning
-    // --------------------------------
+    // 1 2 3 4 5 ... last
     if (currentPage <= 4) {
-      return [
-        1,
-        2,
-        3,
-        4,
-        5,
-        "...",
-        totalPages,
-      ];
+      return [1, 2, 3, 4, 5, "...", totalPages];
     }
 
-    // --------------------------------
     // Near the end
-    // --------------------------------
+    // 1 ... last-4 last-3 last-2 last-1 last
     if (currentPage >= totalPages - 3) {
       return [
         1,
@@ -58,17 +48,14 @@ const Pagination = ({
       ];
     }
 
-    // --------------------------------
     // Middle
-    // --------------------------------
+    // 1 ... current-1 current current+1 ... last
     return [
       1,
       "...",
-      currentPage - 2,
       currentPage - 1,
       currentPage,
       currentPage + 1,
-      currentPage + 2,
       "...",
       totalPages,
     ];
@@ -108,74 +95,96 @@ const Pagination = ({
     <nav
       aria-label="Pagination"
       className={cn(
-        "flex items-center justify-center gap-1.5",
+        "flex flex-col items-center justify-center gap-3 md:gap-1.5",
         className
       )}
     >
-      {/* Previous */}
-      <Button
-        type="button"
-        size="sm"
-        onClick={handlePrevious}
-        disabled={currentPage === 1}
-        aria-label="Previous page"
-        // className={cn(
-        //   "flex h-9 w-9 items-center justify-center rounded-md border transition-colors",
-         
-        // )}
-      >
-        <FiChevronLeft size={17} />
-      </Button>
+      {/* Desktop Pagination */}
+      <div className="flex items-center justify-center gap-1.5">
+        {/* Previous */}
+        <Button
+          type="button"
+          size="sm"
+          onClick={handlePrevious}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+          className="hidden md:flex h-9"
+        >
+          <FiChevronLeft size={17} />
+        </Button>
 
-      {/* Page Numbers */}
-      {pages.map((page, index) => {
-        if (page === "...") {
+        {/* Page Numbers */}
+        {pages.map((page, index) => {
+          if (page === "...") {
+            return (
+              <span
+                key={`ellipsis-${index}`}
+                className="flex h-9 w-9 items-center justify-center text-sm text-foreground-secondary"
+              >
+                ...
+              </span>
+            );
+          }
+
           return (
-            <span
-              key={`ellipsis-${index}`}
-              className="flex h-9 w-9 items-center justify-center text-sm text-gray-500"
+            <button
+              key={page}
+              type="button"
+              onClick={() => handlePageChange(page)}
+              aria-current={
+                currentPage === page ? "page" : undefined
+              }
+              className={cn(
+                "flex h-7 w-7 md:h-9 md:w-9 border-input-border items-center cursor-pointer justify-center rounded-md border text-xs md:text-sm font-medium transition-none",
+                currentPage === page
+                  ? "bg-primary text-white"
+                  : "bg-background-secondary"
+              )}
             >
-              ...
-            </span>
+              {page}
+            </button>
           );
-        }
+        })}
 
-        return (
-          <button
-            key={page}
-            type="button"
-            onClick={() => handlePageChange(page)}
-            aria-current={
-              currentPage === page ? "page" : undefined
-            }
-            className={cn(
-              "flex h-9 min-w-9 items-center cursor-pointer justify-center rounded-md border px-2 text-sm font-medium transition-colors",
-              currentPage === page
-                ? "border-border-input bg-primary text-white"
-                : "border-gray-200  bg-white  hover:bg-gray-100"
-            )}
-          >
-            {page}
-          </button>
-        );
-      })}
+        {/* Next */}
+        <Button
+          type="button"
+          size="sm"
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          aria-label="Next page"
+          className="hidden md:flex h-9"
+        >
+          <FiChevronRight size={17} />
+        </Button>
+      </div>
 
-      {/* Next */}
-      <Button
-        type="button"
-        size="sm"
-        onClick={handleNext}
-        disabled={currentPage === totalPages}
-        aria-label="Next page"
-        // className={cn(
-        //   "flex h-9 w-9 items-center justify-center rounded-md border transition-colors",
-        //   currentPage === totalPages
-        //     ? "cursor-not-allowed opacity-40"
-        //     : "hover:bg-gray-100"
-        // )}
-      >
-        <FiChevronRight size={17} />
-      </Button>
+      {/* Mobile Previous / Next */}
+      <div className="flex w-full gap-2 md:hidden">
+        <Button
+          type="button"
+          size="sm"
+          onClick={handlePrevious}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+          className="flex-1 h-9"
+        >
+          <FiChevronLeft size={17} />
+          <span>Previous</span>
+        </Button>
+
+        <Button
+          type="button"
+          size="sm"
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          aria-label="Next page"
+          className="flex-1 h-9"
+        >
+          <span>Next</span>
+          <FiChevronRight size={17} />
+        </Button>
+      </div>
     </nav>
   );
 };

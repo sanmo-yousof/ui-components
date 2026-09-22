@@ -31,15 +31,15 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           required={required}
           placeholder={placeholder}
           className={cn(
-            "min-h-28 w-full bg-background-secondary resize-y rounded-md px-3 py-2.5",
+            "min-h-28 w-full text-input-text bg-input-background resize-y rounded-md px-3 py-2.5",
             "text-sm",
-            "placeholder:text-foreground-secondary",
+            "placeholder:text-input-placeholder",
             "transition-all duration-200",
-            border && "border border-border-input focus:border-primary",
+            border && "border border-input-border focus:border-input-active-border",
             !border && "border-none",
-            outline && "focus:outline-none focus:ring-2 focus:ring-primary/30",
+            outline && "focus:outline-none focus:ring-2 focus:ring-input-active-ring",
             !outline && "focus:outline-none focus:ring-0",
-            disabled && "cursor-not-allowed bg-background-secondary opacity-60",
+            disabled && "cursor-not-allowed bg-input-disabled-background opacity-60",
             className,
           )}
           {...props}

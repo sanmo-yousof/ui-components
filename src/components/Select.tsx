@@ -129,20 +129,20 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             disabled={disabled}
             onClick={() => setOpen((prev) => !prev)}
             className={cn(
-              "flex h-11 w-full min-w-[200px] bg-background-secondary items-center cursor-pointer justify-between",
+              "flex h-11 w-full min-w-[200px] text-input-text bg-input-background items-center cursor-pointer justify-between",
               "rounded-md  px-3 text-left text-sm",
               "transition-all duration-200",
-              border && "border border-border-input focus:border-primary",
+              border && "border border-input-border focus:border-input-active-border",
               !border && "border-none",
-              outline && open && "outline-none ring-2 ring-primary/30",
+              outline && open && "outline-none ring-2 ring-input-active-ring",
               !outline && "outline-none ring-0",
-              disabled && "cursor-not-allowed bg-background-secondary opacity-60",
+              disabled && "cursor-not-allowed bg-input-disabled-background opacity-60",
               className,
             )}
           >
             {/* Selected item / Placeholder */}
             <span
-              className={cn(selectedOption ? "" : "text-foreground-secondary")}
+              className={cn(selectedOption ? "" : "text-input-placeholder")}
             >
               {selectedOption?.label || placeholder}
             </span>
@@ -150,7 +150,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             <FiChevronDown
               size={18}
               className={cn(
-                "shrink-0 text-foreground-secondary transition-transform duration-200",
+                "shrink-0 text-input-icon transition-transform duration-200",
                 open && "rotate-180",
               )}
             />
@@ -162,8 +162,8 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               className={cn(
                 "absolute left-0 top-full z-50 mt-1 w-full",
                 "overflow-hidden rounded-md",
-                "border bg-dropdown border-border-input/20",
-                "shadow",
+                "border bg-dropdown-background border-input-border/50",
+                "shadow-custom",
               )}
             >
               <div className="max-h-60 overflow-y-auto p-1">

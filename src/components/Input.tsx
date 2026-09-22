@@ -22,6 +22,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label = "",
       disabled,
       required = false,
+      maxLength,
+      onChange,
       ...props
     },
     ref,
@@ -32,6 +34,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const isNumber = type === "number";
 
     const inputType = isPassword ? (showPassword ? "text" : "password") : type;
+    const numberMaxLength = maxLength ?? 4;
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (isNumber && ["e", "E", "+", "-"].includes(e.key)) {
@@ -39,6 +42,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
 
       props.onKeyDown?.(e);
+    };
+
+     const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      if (isNumber && numberMaxLength) {
+        e.target.value = e.target.value.slice(0, numberMaxLength);
+      }
+
+      onChange?.(e);
     };
 
     return (
@@ -50,25 +63,26 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={inputType}
             disabled={disabled}
             required={required}
+            maxLength={isNumber ? numberMaxLength : maxLength}
             onKeyDown={handleKeyDown}
+            onChange={handleChange}
             className={cn(
-              "h-11 w-full rounded-md bg-background-secondary  px-3 text-sm",
-              "placeholder:text-foreground-secondary",
+              "h-11 w-full text-input-text rounded-md bg-input-background px-3 text-sm",
+              "placeholder:text-input-placeholder",
               "transition-all duration-200",
               isNumber &&
                 "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
-              border && "border border-border-input focus:border-primary",
+              border && "border border-input-border focus:border-input-active-border",
               !border && "border-none",
               outline &&
-                "focus:outline-none focus:ring-2 focus:ring-primary/30",
+                "focus:outline-none focus:ring-2 focus:ring-input-active-ring",
               !outline && "focus:outline-none focus:ring-0",
-              disabled && "cursor-not-allowed bg-background-secondary opacity-60",
+              disabled && "cursor-not-allowed bg-input-disabled-background opacity-60",
               isPassword && "pr-10",
               className,
             )}
             {...props}
           />
-
           {isPassword && (
             <button
               type="button"
@@ -77,8 +91,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               onClick={() => setShowPassword((prev) => !prev)}
               className={cn(
                 "absolute cursor-pointer right-3 top-1/2 -translate-y-1/2",
-                "text-foreground-secondary transition-colors",
-                "hover:text-primary",
+                "text-input-icon text-lg transition-colors",
+                "hover:text-input-hover-text",
                 disabled && "pointer-events-none",
               )}
             >
