@@ -9,7 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   outline?: boolean;
   border?: boolean;
   label?: string;
-  required?: boolean;
+  error?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -24,6 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       required = false,
       maxLength,
       onChange,
+      error,
       ...props
     },
     ref,
@@ -44,9 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       props.onKeyDown?.(e);
     };
 
-     const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement>,
-    ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (isNumber && numberMaxLength) {
         e.target.value = e.target.value.slice(0, numberMaxLength);
       }
@@ -55,14 +54,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <div className="max-w-sm w-full">
+      <div className="w-full">
         <Label required={required}>{label}</Label>
         <div className="relative w-full">
           <input
             ref={ref}
             type={inputType}
             disabled={disabled}
-            required={required}
             maxLength={isNumber ? numberMaxLength : maxLength}
             onKeyDown={handleKeyDown}
             onChange={handleChange}
@@ -72,12 +70,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "transition-all duration-200",
               isNumber &&
                 "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
-              border && "border border-input-border focus:border-input-active-border",
+              border &&
+                "border border-input-border focus:border-input-active-border",
               !border && "border-none",
               outline &&
                 "focus:outline-none focus:ring-2 focus:ring-input-active-ring",
               !outline && "focus:outline-none focus:ring-0",
-              disabled && "cursor-not-allowed bg-input-disabled-background opacity-60",
+              disabled &&
+                "cursor-not-allowed bg-input-disabled-background opacity-60",
               isPassword && "pr-10",
               className,
             )}
@@ -100,6 +100,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
         </div>
+        {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
       </div>
     );
   },

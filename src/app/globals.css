@@ -3,7 +3,7 @@
 :root {
   /* background color */
   --background: #ffffff;
-  --background-secondary: #f8fafc;
+  --background-secondary: #f1f4f7;
   --background-custom: #eef2f6;
 
   /* text color */
@@ -29,9 +29,9 @@
 
   /* input items */
   --input-placeholder: #9ca3af;
-  --input-background: #ffffff;
+  --input-background: #fafafa;
   --input-disabled-background: #f3f4f6;
-  --input-border: #d1d5db;
+  --input-border: #d7dadd;
   --input-active-border: #059669;
   --input-active-ring: #6ee7b7;
   --input-icon: #6b7280;
@@ -59,7 +59,6 @@
 
   /* border */
   --color-border: var(--border);
-  --color-border-input: var(--border-input);
 
   /* input items */
   --color-input-placeholder: var(--input-placeholder);
@@ -108,9 +107,9 @@
 
     /* input items */
     --input-placeholder: #64748b;
-    --input-background: #111827;
-    --input-disabled-background: #1e293b;
-    --input-border: #475569;
+    --input-background: #202631;
+    --input-disabled-background: #111925;
+    --input-border: #38404b;
     --input-active-border: #34d399;
     --input-active-ring: #047857;
     --input-icon: #94a3b8;

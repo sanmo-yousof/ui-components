@@ -1,18 +1,18 @@
 "use client"
 
-import Button from "@/components/Button";
-import DatePicker from "@/components/DatePicker";
-import FileUpload from "@/components/FileUpload";
-import FilterSelect from "@/components/FilterSelect";
-import Input from "@/components/Input";
-import OTPInput from "@/components/OtpInput";
-import Pagination from "@/components/Pagination";
-import ProfileImageUpload from "@/components/ProfileImageUpload";
-import RangeInput from "@/components/RangeInput";
-import Search from "@/components/Search";
-import Select from "@/components/Select";
-import Textarea from "@/components/Textarea";
-import ThemeToggle from "@/components/ThemeToggle";
+import Button from "@/components/ui/Button";
+import DatePicker from "@/components/ui/DatePicker";
+import FileUpload from "@/components/ui/FileUpload";
+import FilterSelect from "@/components/ui/FilterSelect";
+import Input from "@/components/ui/Input";
+import OTPInput from "@/components/ui/OtpInput";
+import Pagination from "@/components/ui/Pagination";
+import ProfileImageUpload from "@/components/ui/ProfileImageUpload";
+import RangeInput from "@/components/ui/RangeInput";
+import Search from "@/components/ui/Search";
+import Select from "@/components/ui/Select";
+import Textarea from "@/components/ui/Textarea";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useState } from "react";
 
 export default function Home() {

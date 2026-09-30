@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Label from "./Label";
 
+
 interface RangeInputProps {
   min?: number;
   max?: number;
