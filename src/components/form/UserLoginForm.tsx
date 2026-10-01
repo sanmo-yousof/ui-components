@@ -1,23 +1,27 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
+import SectionSubTitle from "@/components/typo/SectionSubTitle";
+import Checkbox from "@/components/ui/CheckBox";
+import CustomLink from "@/components/shared/CustomLink";
+import Divider from "@/components/ui/Divider";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import SectionSubTitle from "@/components/typo/SectionSubTitle";
-import CustomLink from "@/components/shared/CustomLink";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import api from "@/lib/axios";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import { showApiErrorToast } from "@/utils/apiErrorToast";
-import { useRouter } from "next/navigation";
+import SocialLogins from "../shared/SocialLogins";
 
-interface RegisterForm {
-  name: string;
+interface LoginForm {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 
-export default function UserRegisterForm() {
+export default function UserLoginForm() {
+ 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -25,41 +29,34 @@ export default function UserRegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterForm>();
+  } = useForm<LoginForm>();
 
-  const onSubmit = async (data: RegisterForm) => {
+  const onSubmit = async (data: LoginForm) => {
     try {
       setLoading(true);
-       await api.post("/register", data);
-      toast.success("Account Created");
-      router.push("/user-dashboard");
+      const response = await api.post("/login", data);
+      const user = response.data.data;
+      toast.success("Login Success");
+      if (user.role === "admin") {
+        router.push("/admin-dashboard");
+      } else {
+        router.push("/user-dashboard");
+      }
     } catch (error) {
       showApiErrorToast(error);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 lg:w-[380px]">
       <div>
         <Input
-          type="text"
-          label="Name"
-          disabled={loading}
-          required
-          placeholder="Enter Your Name"
-          {...register("name", {
-            required: "Name is required",
-          })}
-          error={errors.name?.message}
-        />
-      </div>
-      <div>
-        <Input
           type="email"
           label="Email"
-          disabled={loading}
           required
+          disabled={loading}
           placeholder="Enter Your Email"
           {...register("email", {
             required: "Email is required",
@@ -75,27 +72,30 @@ export default function UserRegisterForm() {
         <Input
           type="password"
           label="Password"
-          disabled={loading}
           required
+          disabled={loading}
           placeholder="Enter Password"
           {...register("password", {
             required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
           })}
           error={errors.password?.message}
         />
       </div>
+      <div className="flex justify-between">
+        <Checkbox {...register("rememberMe")} label="Remember Me" />
+        <CustomLink text="Forgot Passowrd" href="/forgot-password" />
+      </div>
       <Button loading={loading} type="submit" className="my-4 w-full">
-        Register
+        Login
       </Button>
 
       <SectionSubTitle>
-        Already have an account?{" "}
-        <CustomLink className="ml-2" href="/login" text="Login" />
+        Don't have an account?{" "}
+        <CustomLink className="ml-2" href="/register" text="Register" />
       </SectionSubTitle>
+
+      <Divider className="mt-6" text="Or continue with" />
+      <SocialLogins/>
     </form>
   );
 }

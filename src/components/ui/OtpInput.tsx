@@ -19,6 +19,7 @@ interface OTPInputProps {
   required?: boolean;
   disabled?: boolean;
   className?: string;
+  error?: string;
 }
 
 const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
@@ -31,6 +32,7 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
       required = false,
       disabled = false,
       className,
+      error,
     },
     ref,
   ) => {
@@ -124,10 +126,10 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
     };
 
     return (
-      <div className="w-full max-w-md">
+      <div className="w-full ">
         {label && <Label required={required}>{label}</Label>}
 
-        <div className={cn("flex items-center gap-2", className)}>
+        <div className={cn("flex justify-between items-center gap-2", className)}>
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -139,14 +141,13 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
               maxLength={1}
               value={digit}
               disabled={disabled}
-              required={required}
               placeholder="0"
               autoComplete={index === 0 ? "one-time-code" : "off"}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={(e) => handlePaste(e, index)}
               className={cn(
-                "h-11 w-11 rounded-md text-input-text px-2 bg-input-background text-center text-base",
+                 "h-11 w-12 rounded-md text-input-text px-2 bg-input-background text-center text-base",
                 "font-medium",
                 "placeholder:text-input-placeholder",
                 "transition-all duration-200",
@@ -160,6 +161,7 @@ const OTPInput = forwardRef<HTMLInputElement[], OTPInputProps>(
             />
           ))}
         </div>
+        {error && ( <p className="mt-1 text-xs text-red-500"> {error} </p> )}
       </div>
     );
   },

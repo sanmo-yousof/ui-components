@@ -13,10 +13,13 @@ import Search from "@/components/ui/Search";
 import Select from "@/components/ui/Select";
 import Textarea from "@/components/ui/Textarea";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import useAuth from "@/hook/useAuth";
 import { useState } from "react";
 
 export default function Home() {
   const [currentPage,setCurrentPage] = useState(1)
+  const { user } = useAuth();
+  console.log(user)
   return (
     <div className="space-y-8 flex px-4 flex-col">
       <div>

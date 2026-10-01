@@ -1,24 +1,24 @@
-import React from 'react'
-import Container from "@/components/layout/Container";
-import auth from "@/assets/auth/auth.png";
 import Image from "next/image";
+import React from "react";
+import auth from "@/assets/auth/auth.png";
+import Container from "@/components/layout/Container";
 import Logo from "@/components/shared/Logo";
 import SectionHeading from "@/components/shared/SectionHeading";
-import UserRegisterForm from '@/components/form/UserRegisterForm';
+import ResetPasswordForm from "@/components/form/ResetPasswordForm";
 
-
-export default function Page() {
+export default function page() {
   return (
     <Container className="lg:flex items-center">
       <div className="lg:w-1/2 md:w-[390px]  mx-auto ">
         <Logo />
         <SectionHeading
           className="mb-6 mt-2"
-          title="Create Account!"
-          subTitle="Welcome create your account."
+          title="Reset Password!"
+          subTitle="Enter your new password below."
         />
-        <UserRegisterForm/>
+        <ResetPasswordForm/>
       </div>
+
       <div className="hidden lg:block lg:w-1/2">
         <Image
           src={auth}
