@@ -3,8 +3,8 @@
 :root {
   /* background color */
   --background: #ffffff;
-  --background-secondary: #f1f4f7;
-  --background-custom: #eef2f6;
+  --background-secondary: #f5f7fa;
+  --background-custom: #e9eef3;
 
   /* text color */
   --foreground: #111827;
@@ -16,16 +16,13 @@
 
   /* shadow */
   --shadow-custom:
-    0 10px 15px -3px rgb(15 23 42 / 0.08),
-    0 4px 6px -4px rgb(15 23 42 / 0.08);
+    0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.08);
 
   /* dropdown color */
   --dropdown-background: #ffffff;
-   
 
   /* border color */
   --border: #e5e7eb;
-  
 
   /* input items */
   --input-placeholder: #9ca3af;
@@ -36,7 +33,7 @@
   --input-active-ring: #6ee7b7;
   --input-icon: #6b7280;
   --input-text: #111827;
-  --input-hover-text:#059669;
+  --input-hover-text: #059669;
 }
 
 @theme inline {
@@ -55,7 +52,6 @@
 
   /* dropdown color */
   --color-dropdown-background: var(--dropdown-background);
-
 
   /* border */
   --color-border: var(--border);
@@ -81,9 +77,9 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* background color */
-    --background: #0f172a;
-    --background-secondary: #111827;
-    --background-custom: #1e293b;
+    --background: #0f1115;
+    --background-secondary: #171a21;
+    --background-custom: #20242c;
 
     /* text color */
     --foreground: #f8fafc;
@@ -95,15 +91,13 @@
 
     /* shadow */
     --shadow-custom:
-      0 10px 15px -3px rgb(0 0 0 / 0.35),
-      0 4px 6px -4px rgb(0 0 0 / 0.35);
+      0 10px 15px -3px rgb(0 0 0 / 0.35), 0 4px 6px -4px rgb(0 0 0 / 0.35);
 
     /* dropdown color */
     --dropdown-background: #111827;
 
     /* border color */
     --border: #334155;
-
 
     /* input items */
     --input-placeholder: #64748b;
@@ -114,8 +108,43 @@
     --input-active-ring: #047857;
     --input-icon: #94a3b8;
     --input-text: #f8fafc;
-    --input-hover-text:#059669;
+    --input-hover-text: #059669;
   }
+}
+
+/* Scrollbar space is always reserved */
+.custom-scrollbar {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+/* Show scrollbar on hover */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.custom-scrollbar:hover {
+  scrollbar-color: var(--color-border) transparent;
 }
 
 body {

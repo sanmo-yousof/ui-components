@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/context/AuthContext";
+import ThemeProvider from "@/providers/ThemeProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -24,9 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-poppins">
-        <AuthProvider>{children}</AuthProvider>
-
-        <Toaster position="top-right" reverseOrder={false} />
+        <ThemeProvider>
+          <AuthProvider>{children}</AuthProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+        </ThemeProvider>
       </body>
     </html>
   );
